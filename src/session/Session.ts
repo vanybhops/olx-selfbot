@@ -49,7 +49,7 @@ class session {
     async returnData(returnType: dataType, response: Response){
         switch (returnType) {
             case "json":
-                const jsonData = await response.json();
+                const jsonData: any = await response.json();
                 return jsonData
             case "text":
                 const textData: string = await response.text();

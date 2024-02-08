@@ -1,3 +1,7 @@
 import { Client } from "../client/Client";
 
-class Login extends Client
+class login {
+    constructor(session: ) {
+        
+    }
+}

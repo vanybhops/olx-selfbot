@@ -1,12 +1,31 @@
+import { login } from "../api/Login";
+import { uploadPost } from "../api/uploadPost";
+import { Session } from "../session/Session";
 class Client {
-    username: string;
-    password: string;
-    constructor(username: string, password: string) {
-        this.username = username;
-        this.password = password;
+    private session: Session;
+    private logginSuccessful: any;
+    private loginFailed: any;
+    private loginPromise:Promise<any> = new Promise<void>((resolve, reject) => {
+        this.logginSuccessful = resolve
+        this.loginFailed = reject
+    });
+    constructor() {
+        this.session = new Session();
     }
-    private login(){
-        
+    async login(username:string, password:string){
+        let loginResponse = await login(username,password,this.session)
+        if (loginResponse=="error") {
+            this.loginFailed()
+            this.loginPromise.catch(_=>{
+                throw new Error("Login failed\nwrong username or password");
+                
+            })
+        }
+        this.session.globalHeaders.Authorization = "Bearer " + loginResponse
+        this.logginSuccessful("done")
+    }
+    async uploadPost(){
+        /*placeholder*/
     }
 }
 export { Client }

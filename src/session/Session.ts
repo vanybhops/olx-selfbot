@@ -1,7 +1,7 @@
 type dataType = "json" | "text" | any;
-class session {
+class Session {
     cookies: any={};
-    globalHeaders: any;
+    globalHeaders: any={};
     async get(url: string, method?:any, returnType?: dataType): Promise<Response | any | string> {
         const response = await fetch(url, {
             headers: {
@@ -16,7 +16,7 @@ class session {
         return this.returnData(returnType, response)
     }
 
-    async post(url: string, method: any, returnType: dataType): Promise<Response | any | string> {
+    async post(url: string, method: any, returnType: dataType, body:string): Promise<Response | any | string> {
         const response = await fetch(
             url, {
             headers: {
@@ -24,7 +24,23 @@ class session {
                 ...this.globalHeaders,
                 "cookie":this.getCookies()
             },
+            body:body,
             method: "POST"
+        })
+        let responseCookies = response.headers.getSetCookie() 
+        this.setCookies( responseCookies )
+        return this.returnData(returnType, response)
+    }
+    async put(url: string, method: any, returnType: dataType, body:string): Promise<Response | any | string> {
+        const response = await fetch(
+            url, {
+            headers: {
+                ...method,
+                ...this.globalHeaders,
+                "cookie":this.getCookies()
+            },
+            body:body,
+            method: "PUT"
         })
         let responseCookies = response.headers.getSetCookie() 
         this.setCookies( responseCookies )
@@ -60,4 +76,4 @@ class session {
     }
 }
 
-export { session }
+export { Session }

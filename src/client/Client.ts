@@ -1,4 +1,5 @@
 import { login } from "../api/Login";
+import { reportPost } from "../api/reportPost";
 import { uploadPost } from "../api/uploadPost";
 import { Session } from "../session/Session";
 class Client {
@@ -26,6 +27,9 @@ class Client {
     }
     async uploadPost(){
         /*placeholder*/
+    }
+    async reportPost(postId:string, description:string, category_id: string){
+        reportPost(postId, description, category_id, this.session)
     }
 }
 export { Client }

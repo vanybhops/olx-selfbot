@@ -1,5 +1,5 @@
-let username = "regleg"
-let password = "emir12312"
+let username = "username"
+let password = "password"
 export {
     username,
     password

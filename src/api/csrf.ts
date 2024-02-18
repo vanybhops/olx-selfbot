@@ -6,4 +6,4 @@ async function csrf(session:Session) {
     let token = session.cookies["XSRF-TOKEN"]
     session.globalHeaders['X-Xsrf-Token'] = token
 }
-export {csrf}
+export { csrf }

@@ -1,6 +1,6 @@
 import { login } from "../api/Login";
-import { reportPost } from "../api/reportPost";
-import { uploadPost } from "../api/uploadPost";
+import { reportPost } from "../api/posts/reportPost";
+import { uploadPost } from "../api/posts/uploadPost";
 import { Session } from "../session/Session";
 class Client {
     private session: Session;

@@ -5,11 +5,11 @@ async function createPost(session: Session, body:any): Promise<any> {
 
     return await session.post(
         `${apiUrl}/listings`,
+        "json",
+        body,
         {
             "content-type": "application/json",
-        },
-        "json",
-        body
+        }
     )
 }
 export { createPost }

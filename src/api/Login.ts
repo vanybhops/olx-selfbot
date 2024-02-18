@@ -9,7 +9,7 @@ async function login(username:string, password:string, session:Session):Promise<
         "password":password,
         "device_name":"web"
     })
-    let data = await session.post(`${apiUrl}/auth/login`,{"Content-Type":"application/json"},"json",paresdLoginBody)
+    let data = await session.post(`${apiUrl}/auth/login`,"json",paresdLoginBody, {"Content-Type":"application/json"})
     return data?.token||"error";
 }
 export { login }

@@ -5,13 +5,13 @@ async function reportPost(postId: string, description: string, category_id: stri
 
     return await session.post(`
         ${apiUrl}/listings/${postId}/submit-report`,
-        { "Content-Type": "application/json" },
         "json",
         JSON.stringify({
             "reason": "Pogrešna kategorija",
             "explanation": description,
             "category_id": category_id
-        })
+        }),
+        { "Content-Type": "application/json" },
     )
 
 }

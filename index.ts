@@ -3,5 +3,5 @@ import { Client } from "./src/client/Client";
 (async () => {
     let client = new Client();
     client.login(username, password)
-    await client.uploadPost()
+    console.log(await client.reportPost("1337", "nig","1336"))
 })()

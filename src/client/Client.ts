@@ -1,7 +1,8 @@
 import { login } from "../api/Login";
 import { reportPost } from "../api/posts/reportPost";
-import { uploadPost } from "../api/posts/uploadPost";
+import { publishPost } from "../api/posts/publishPost";
 import { Session } from "../session/Session";
+import { createPost } from "../api/posts/createPost";
 class Client {
     private session: Session;
     private logginSuccessful: any;
@@ -25,11 +26,17 @@ class Client {
         this.session.globalHeaders.Authorization = "Bearer " + loginResponse
         this.logginSuccessful("done")
     }
-    async uploadPost(){
-        /*placeholder*/
+    async publishPost( id:number ){
+        await this.loginPromise;
+        return publishPost(this.session, id)
+    }
+    async createPost(){
+        await this.loginPromise;
+        return createPost(this.session, {"nigga":"wat"})
     }
     async reportPost(postId:string, description:string, category_id: string){
-        reportPost(postId, description, category_id, this.session)
+        await this.loginPromise;
+        return reportPost(postId, description, category_id, this.session)
     }
 }
 export { Client }

@@ -16,7 +16,7 @@ class Session {
         return this.returnData(returnType, response)
     }
 
-    async post(url: string, method: any, returnType: dataType, body:string): Promise<Response | any | string> {
+    async post(url: string, returnType: dataType, body:string|null|FormData, method: any = {},): Promise<Response | any | string> {
         const response = await fetch(
             url, {
             headers: {
@@ -31,7 +31,7 @@ class Session {
         this.setCookies( responseCookies )
         return this.returnData(returnType, response)
     }
-    async put(url: string, method: any, returnType: dataType, body:string): Promise<Response | any | string> {
+    async put(url: string, returnType: dataType, body:string|null|FormData, method: any = {},): Promise<Response | any | string> {
         const response = await fetch(
             url, {
             headers: {
@@ -65,7 +65,12 @@ class Session {
     async returnData(returnType: dataType, response: Response){
         switch (returnType) {
             case "json":
-                const jsonData: any = await response.json();
+                let jsonData: any;
+                try{
+                    jsonData = await response.json();  
+                }catch{
+                    jsonData = "error"
+                }
                 return jsonData
             case "text":
                 const textData: string = await response.text();

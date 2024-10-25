@@ -32,7 +32,7 @@ class Client {
     }
     async createPost(){
         await this.loginPromise;
-        return createPost(this.session, {})
+        return createPost(this.session, { })
     }
     async reportPost(postId:string, description:string, category_id: string){
         await this.loginPromise;
